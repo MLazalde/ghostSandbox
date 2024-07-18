@@ -16,9 +16,9 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    product_name: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false
     },
     productImage_Url: {
       type: DataTypes.STRING,
@@ -28,7 +28,7 @@ Product.init(
   {
     sequelize,
     freezeTableName: true,
-    modelName: "product",
+    modelName: "Product",
   }
 );
 

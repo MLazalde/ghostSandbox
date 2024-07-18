@@ -15,9 +15,9 @@ Card.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    card_name: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     cardImage_Url: {
       type: DataTypes.STRING,
@@ -27,7 +27,7 @@ Card.init(
   {
     sequelize,
     freezeTableName: true,
-    modelName: "card",
+    modelName: "Card",
   }
 );
 

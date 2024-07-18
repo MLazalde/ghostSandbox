@@ -16,9 +16,9 @@ Set.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    set_name: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     setImage_Url: {
       type: DataTypes.STRING,
@@ -28,7 +28,7 @@ Set.init(
   {
     sequelize,
     freezeTableName: true,
-    modelName: "set",
+    modelName: "Set",
   }
 );
 

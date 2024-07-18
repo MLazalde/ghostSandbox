@@ -1,0 +1,25 @@
+{{#extends 'layouts/main'}}
+
+{{#content 'body'}}
+  <h1>{{user.name}}'s Profile</h1>
+  <h2>Products</h2>
+  <ul>
+    {{#each user.Products}}
+      <li>{{this.name}}</li>
+    {{/each}}
+  </ul>
+  
+  <h2>Sets</h2>
+  <ul>
+    {{#each user.Sets}}
+      <li>{{this.name}}</li>
+    {{/each}}
+  </ul>
+  
+  <h2>Cards</h2>
+  <ul>
+    {{#each user.Cards}}
+      <li>{{this.name}}</li>
+    {{/each}}
+  </ul>
+{{/content}}

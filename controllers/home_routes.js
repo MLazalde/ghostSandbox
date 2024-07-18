@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Route to render user profile
 router.get('/profile/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
