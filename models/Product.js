@@ -18,7 +18,7 @@ Product.init(
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
     },
     productImage_Url: {
       type: DataTypes.STRING,

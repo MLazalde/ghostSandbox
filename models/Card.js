@@ -17,7 +17,7 @@ Card.init(
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     cardImage_Url: {
       type: DataTypes.STRING,

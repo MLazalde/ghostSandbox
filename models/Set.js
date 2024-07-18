@@ -18,7 +18,7 @@ Set.init(
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     setImage_Url: {
       type: DataTypes.STRING,
