@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Product, Set } = require('../../models');
 
 // Get all products
+//http://localhost:3001/api/
 router.get('/', async (req, res) => {
   try {
     const products = await Product.findAll({

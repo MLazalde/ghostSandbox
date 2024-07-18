@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Product, Set, Card } = require('../../models');
 
 // Get user profile
+//http://localhost:3001/api/:id
 router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
@@ -19,6 +20,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Add product to user profile
+//http://localhost:3001/api/:id/products
 router.post('/:id/products', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -35,6 +37,7 @@ router.post('/:id/products', async (req, res) => {
 });
 
 // Add set to user profile
+//http://localhost:3001/api/:id/sets
 router.post('/:id/sets', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -51,6 +54,7 @@ router.post('/:id/sets', async (req, res) => {
 });
 
 // Add card to user profile
+//http://localhost:3001/api/:id/cards
 router.post('/:id/cards', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);

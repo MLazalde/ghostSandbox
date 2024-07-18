@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Product, Set, Card } = require('../models');
 
 // Home route to render homepage
+//http://localhost:3001/
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 // Route to render user profile
+//http://localhost:3001/profile/:id
 router.get('/profile/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
