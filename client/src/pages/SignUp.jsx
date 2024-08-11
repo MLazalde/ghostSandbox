@@ -1,10 +1,9 @@
 import * as React from "react";
+import { useMutation } from "@apollo/client";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,41 +11,42 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ADD_USER } from "../utils/mutations";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const theme = createTheme();
 
-// TODO remove, this demo shouldn't need to reset the theme.
+const SignUp = () => {
+  const [formState, setFormState] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-const defaultTheme = createTheme();
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    try {
+      const { data } = await addUser({
+        variables: {
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+          email: formState.email,
+          password: formState.password,
+        },
+      });
+
+      console.log("User created:", data);
+      // Redirect or update the UI as needed
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -65,20 +65,22 @@ export default function SignUp() {
           </Typography>
           <Box
             component="form"
+            onSubmit={handleFormSubmit}
             noValidate
-            onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={(e) =>
+                    setFormState({ ...formState, firstName: e.target.value })
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -88,7 +90,9 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  autoComplete="family-name"
+                  onChange={(e) =>
+                    setFormState({ ...formState, lastName: e.target.value })
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,7 +102,9 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  onChange={(e) =>
+                    setFormState({ ...formState, email: e.target.value })
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,15 +115,9 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
+                  onChange={(e) =>
+                    setFormState({ ...formState, password: e.target.value })
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
@@ -138,8 +138,9 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignUp;
